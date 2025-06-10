@@ -1,36 +1,53 @@
 import {ReactElement, useState} from "react"
 
-function Square() {
+// Square will need props, and and interface for them:
 
-  const [value, setValue] = useState<null | 'X'>(null);
+interface SquareProps {
+  value : string | null;
+  onSquareClick: ()=> void;
+}
 
-  function handleClick() {
-    setValue('X');
-  }
-
+function Square({value, onSquareClick}: SquareProps) {
   return  <button 
-          className="square" 
-          onClick={handleClick}>
+          className="square" >
             {value}
           </button>;
 }
 
+// Board prop interface might look like this -
+interface BoardProps {
+// xIsNext : boolean;
+squares : (string | null);
+}
+
+
+
 function Board(): ReactElement {
+  type BoardSet = ('X' | 'O' | null)[]
+
+  const [squares , setSquares] = useState<BoardSet>(Array(9).fill(null))
+
+  function handleClick() {
+    const nextSquares : BoardSet = squares.slice()
+    nextSquares[0] = "X"
+    setSquares(nextSquares);
+  }
+
   return (
   <>
     <div className="board-row"></div>
-      <Square />
-      <Square />
-      <Square />
+      <Square value={squares[0]} onSquareClick={handleClick}/>
+      <Square value={squares[1]} onSquareClick={handleClick}/>
+      <Square value={squares[2]} onSquareClick={handleClick}/>
     <div className="board-row">
-      <Square />
-      <Square />
-      <Square />
+      <Square value={squares[3]} onSquareClick={handleClick}/>
+      <Square value={squares[4]} onSquareClick={handleClick}/>
+      <Square value={squares[5]} onSquareClick={handleClick}/>
     </div>
     <div className="board-row">
-      <Square />
-      <Square />
-      <Square />
+      <Square value={squares[6]} onSquareClick={handleClick}/>
+      <Square value={squares[7]} onSquareClick={handleClick}/>
+      <Square value={squares[8]} onSquareClick={handleClick}/>
     </div>
   </>
   )
