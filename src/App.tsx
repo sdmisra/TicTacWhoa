@@ -1,10 +1,24 @@
-import {FC, ReactNode} from "react"
+import {ReactElement} from "react"
 
-const Square : FC = ( ): ReactNode | Promise<ReactNode> => {
-  return 
-  <>
-  <button className="square">X</button>
-  </>;
+function Board(): ReactElement {
+  return (
+    <>
+    <div className="board-row"></div>
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+    <div className="board-row">
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button>
+    </div>
+    <div className="board-row">
+      <button className="square">X</button>
+      <button className="square">X</button>
+      <button className="square">X</button> 
+    </div>
+    </>
+  )
 }
 
 // Helpful code from Kayla to take permissions for CRA and clean the cache : 
@@ -12,4 +26,4 @@ const Square : FC = ( ): ReactNode | Promise<ReactNode> => {
 // sudo chown -R $(whoami) ~/.npm
 //
 // npm cache clean --force
-export default Square;
+export default Board;
